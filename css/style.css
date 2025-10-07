@@ -1,0 +1,63 @@
+/* --- Estilos globales --- */
+body {
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+/* --- Tarjeta contenedora --- */
+.card {
+  background: white;
+  padding: 20px 60px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 340px;
+}
+
+/* --- Input y botón --- */
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  border: 2px solid #dcdde1;
+  border-radius: 8px;
+}
+
+input[type="number"]:focus {
+  border-color: #0984e3;
+  outline: none;
+}
+
+button {
+  background: #0984e3;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button:hover {
+  background: #74b9ff;
+}
+
+/* --- Mensajes --- */
+p {
+  font-size: 1rem;
+  margin-top: 60px;
+}
+
+/* Colores dinámicos para el mensaje */
+.error {
+  color: #e17055; /* naranja */
+}
+
+.acertado {
+  color: #00b894; /* verde */
+}

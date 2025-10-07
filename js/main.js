@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let counter = 0;
     const textAlert = document.createElement("p");
     const textCounter = document.createElement("p");
-    document.body.appendChild(textAlert);
-    document.body.appendChild(textCounter);
+    document.getElementById('card').appendChild(textAlert);
+    document.getElementById('card').appendChild(textCounter);
 
 
     // Escuchamos el evento submit
@@ -23,9 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
             counter++;
             if (numberInput > numRandom) {
                 textAlert.textContent = 'El número es menor de ' + numberInput;
+                textAlert.classList.add('error');
                 textCounter.textContent = 'Intentos totales: ' + counter;
             } else if (numberInput < numRandom) {
                 textAlert.textContent = 'El número es mayor de ' + numberInput;
+                textAlert.classList.add('error');
                 textCounter.textContent = 'Intentos totales: ' + counter;
             } else {
                 if (counter < 5) {
@@ -35,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     textAlert.textContent = 'Regular: Has acertado el número: ' + numberInput + ' en ' + counter + ' intentos.';
                 }
+                textAlert.classList.add('acertado');
                 counter = 0;
                 numRandom = Math.floor(Math.random() * 100) + 1;
                 textCounter.textContent = '';
