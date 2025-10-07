@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // Escuchamos el evento submit
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit' || "keydown", (event) => {
         event.preventDefault(); // Evita recargar la página
 
         // Obtenemos el valor ingresado

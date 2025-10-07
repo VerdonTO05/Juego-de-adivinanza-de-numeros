@@ -56,8 +56,12 @@ p {
 /* Colores dinámicos para el mensaje */
 .error {
   color: #e17055; /* naranja */
+  font-weight: bold;
+  
 }
 
 .acertado {
   color: #00b894; /* verde */
+  font-weight: bold;
 }
+
