@@ -11,9 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('card').appendChild(textAlert);
     document.getElementById('card').appendChild(textCounter);
 
-    form.getElementsByTagName('reload'){
-        location.reload();
-    };
+    
     // Escuchamos el evento submit
     form.addEventListener('submit' || "keydown", (event) => {
         event.preventDefault(); // Evita recargar la página
