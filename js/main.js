@@ -11,7 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('card').appendChild(textAlert);
     document.getElementById('card').appendChild(textCounter);
 
-
+    form.getElementsByTagName('reload'){
+        location.reload();
+    };
     // Escuchamos el evento submit
     form.addEventListener('submit' || "keydown", (event) => {
         event.preventDefault(); // Evita recargar la página
@@ -41,7 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 counter = 0;
                 numRandom = Math.floor(Math.random() * 100) + 1;
                 textCounter.textContent = '';
+                
+                
             }
+            
         } else {
             console.log('Por favor, introduce un número válido.');
         }
