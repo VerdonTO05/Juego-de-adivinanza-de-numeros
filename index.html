@@ -5,25 +5,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juego adivinanza de números - Grupo 5</title>
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/ico" href="assets\img\icons\icon.ico" id="icon.ico">
+    <link rel="icon" type="image/ico" href="assets/img/icons/icon.ico" id="icon.ico">
 </head>
 
 <body>
+    <!-- Switch de tema -->
+    <div class="theme-switch">
+        <input type="checkbox" id="toggleTheme">
+        <label for="toggleTheme" class="switch"></label>
+    </div>
 
+    <!-- Juego principal -->
     <div id="card" class="card">
         <h3>Adivina el número:</h3>
         <form id="myForm">
-            <input type="number" name="num" id="numInput" min="1" max="100"  required>
-            <button type="submit" name="drop">Enviar</button>
-            <button type="submit" name="reload">Reiniciar</button>
-            
-            
+            <input type="number" name="num" id="numInput" min="1" max="100" required>
+            <button type="submit" id="sendBtn">Enviar</button>
+            <button type="button" id="resetBtn">Reiniciar</button>
         </form>
     </div>
-    </br>
+
+    <!-- Historial de intentos -->
+    <div class="card" id="historyCard">
+    <h3>Historial de intentos</h3>
+    <table id="historyTable">
+        <thead>
+            <tr>
+                <th>Intento</th>
+                <th>Número</th>
+                <th>Resultado</th>
+            </tr>
+        </thead>
+        <tbody id="historyBody"></tbody>
+    </table>
+</div>
+
 </body>
 
 </html>
