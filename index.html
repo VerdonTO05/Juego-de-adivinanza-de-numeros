@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/ico" href="assets/img/icons/icon.ico" id="icon.ico">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.10.7/dist/index.umd.js"></script>
 </head>
 
 <body>
@@ -20,7 +22,8 @@
 
     <!-- Juego principal -->
     <div id="card" class="card">
-        <h3>Adivina el número:</h3>
+        <h3>Adivina el número secreto</h3>
+        </br>
         <form id="myForm">
             <input type="number" name="num" id="numInput" min="1" max="100" required>
             <button type="submit" id="sendBtn">Enviar</button>
@@ -30,18 +33,19 @@
 
     <!-- Historial de intentos -->
     <div class="card" id="historyCard">
-    <h3>Historial de intentos</h3>
-    <table id="historyTable">
-        <thead>
-            <tr>
-                <th>Intento</th>
-                <th>Número</th>
-                <th>Resultado</th>
-            </tr>
-        </thead>
-        <tbody id="historyBody"></tbody>
-    </table>
-</div>
+        <h3>Historial de intentos</h3>
+        </br>
+        <table id="historyTable">
+            <thead>
+                <tr>
+                    <th>Intento</th>
+                    <th>Número</th>
+                    <th>Resultado</th>
+                </tr>
+            </thead>
+            <tbody id="historyBody"></tbody>
+        </table>
+    </div>
 
 </body>
 

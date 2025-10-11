@@ -186,3 +186,7 @@ body.dark-mode #historyTable tr:nth-child(even) {
   color: #00b894; /* verde */
   font-weight: bold;
 }
+.result-close {
+    color: orange;
+    font-weight: bold;
+}
