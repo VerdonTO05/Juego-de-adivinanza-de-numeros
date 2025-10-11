@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetBtn = document.getElementById('resetBtn');
     const historyBody = document.getElementById('historyBody');
     const toggleSwitch = document.getElementById('toggleTheme');
+    const toggleHistoryBtn = document.getElementById("toggleHistoryBtn");
+    const historyCard = document.getElementById("historyCard");
 
     // --- Variables del juego ---
     let numRandom = Math.floor(Math.random() * 100) + 1;
@@ -115,6 +117,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Evento: cambio de tema (modo oscuro) ---
     toggleSwitch.addEventListener("change", () => {
         document.body.classList.toggle("dark-mode", toggleSwitch.checked);
+    });
+
+    // --- Ocultamos el historial por defecto ---
+    historyCard.style.display = "none";
+
+    toggleHistoryBtn.addEventListener("click", () => {
+        const visible = historyCard.style.display === "block";
+
+        if (visible) {
+            historyCard.style.display = "none";
+            toggleHistoryBtn.textContent = "Mostrar historial";
+        } else {
+            historyCard.style.display = "block";
+            toggleHistoryBtn.textContent = "Ocultar historial";
+        }
     });
 });
 
