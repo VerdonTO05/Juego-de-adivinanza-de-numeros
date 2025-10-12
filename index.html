@@ -1,53 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juego adivinanza de números - Grupo 5</title>
-    <script src="js/main.js" defer></script>
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/ico" href="assets/img/icons/icon.ico" id="icon.ico">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.10.7/dist/index.umd.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juego adivinanza de números - Grupo 5</title>
+
+  <!-- Archivos del proyecto -->
+  <script src="js/main.js" defer></script>
+  <script src="js/translate.js" defer></script> <!-- nuevo archivo -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/ico" href="assets/img/icons/icon.ico" id="icon.ico">
+
+  <!-- Librerías externas -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.10.7/dist/index.umd.js"></script>
 </head>
 
 <body>
-    <!-- Switch de tema -->
-    <div class="theme-switch">
-        <input type="checkbox" id="toggleTheme">
-        <label for="toggleTheme" class="switch"></label>
-    </div>
+  <!-- 🌐 Traductor oculto -->
+  <div id="google_translate_element"></div>
 
-    <!-- Juego principal -->
-    <div id="card" class="card">
-        <h3>Adivina el número secreto</h3>
-        </br>
-        <form id="myForm">
-            <input type="number" name="num" id="numInput" min="1" max="100" required>
-            <button type="submit" id="sendBtn">Enviar</button>
-            <button type="button" id="resetBtn">Reiniciar</button>
-            <button type="button" id="toggleHistoryBtn">Mostrar historial</button>
-        </form>
-    </div>
+  <!-- Switch de tema -->
+  <div class="theme-switch">
+    <input type="checkbox" id="toggleTheme">
+    <label for="toggleTheme" class="switch"></label>
+  </div>
 
-    <!-- Historial de intentos -->
-    <div class="card" id="historyCard">
-        <h3>Historial de intentos</h3>
-        </br>
-        <table id="historyTable">
-            <thead>
-                <tr>
-                    <th>Intento</th>
-                    <th>Número</th>
-                    <th>Resultado</th>
-                </tr>
-            </thead>
-            <tbody id="historyBody"></tbody>
-        </table>
-    </div>
+  <!-- Juego principal -->
+  <div id="card" class="card">
+    <h3>Adivina el número secreto</h3>
+    <br>
+    <form id="myForm">
+      <input type="number" name="num" id="numInput" min="1" max="100" required>
+      <button type="submit" id="sendBtn">Enviar</button>
+      <button type="button" id="resetBtn">Reiniciar</button>
+      <button type="button" id="toggleHistoryBtn">Mostrar historial</button>
+    </form>
+  </div>
+
+  <!-- Historial -->
+  <div class="card" id="historyCard">
+    <h3>Historial de intentos</h3>
+    <br>
+    <table id="historyTable">
+      <thead>
+        <tr>
+          <th>Intento</th>
+          <th>Número</th>
+          <th>Resultado</th>
+        </tr>
+      </thead>
+      <tbody id="historyBody"></tbody>
+    </table>
+  </div>
+
+  <!-- 🌈 Menú de idiomas -->
+  <div class="language-menu">
+    <img src="https://flagcdn.com/24x18/es.png" alt="Español" data-lang="es">
+    <img src="https://flagcdn.com/24x18/gb.png" alt="Inglés" data-lang="en">
+    <img src="https://flagcdn.com/24x18/fr.png" alt="Francés" data-lang="fr">
+    <img src="https://flagcdn.com/24x18/de.png" alt="Alemán" data-lang="de">
+    <img src="https://flagcdn.com/24x18/it.png" alt="Italiano" data-lang="it">
+    <img src="https://flagcdn.com/24x18/pt.png" alt="Portugués" data-lang="pt">
+  </div>
 
 </body>
-
 </html>
