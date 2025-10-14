@@ -1,32 +1,32 @@
-// Espera a que el DOM esté completamente cargado
+// Espera a que el DOM esté completamente cargado (evitando cualquier error)
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Elementos principales ---
+    // Elementos principales de la página
     const form = document.getElementById('myForm');
     const input = document.getElementById('numInput');
-    const submitBtn = form.querySelector('button[type="submit"]'); // 👈 botón Enviar
+    const submitBtn = form.querySelector('button[type="submit"]');
     const resetBtn = document.getElementById('resetBtn');
     const historyBody = document.getElementById('historyBody');
     const toggleSwitch = document.getElementById('toggleTheme');
     const toggleHistoryBtn = document.getElementById("toggleHistoryBtn");
     const historyCard = document.getElementById("historyCard");
 
-    // --- Variables del juego ---
+    // Variables del juego
     let numRandom = Math.floor(Math.random() * 100) + 1;
     let counter = 0;
 
-    // --- Elementos de feedback ---
+    // Elementos de feedback
     const textAlert = document.createElement("p");
     const textCounter = document.createElement("p");
     document.getElementById('card').appendChild(textAlert);
     document.getElementById('card').appendChild(textCounter);
 
-    // --- Evento: enviar número ---
+    // Evento: enviar número 
     form.addEventListener('submit', (event) => {
         event.preventDefault();
         const numberInput = parseInt(input.value, 10);
 
-        // Validar entrada
+        // Comprueba que el valor introducido sea válido 
         if (isNaN(numberInput)) {
             textAlert.textContent = 'Por favor, introduce un número válido.';
             textAlert.className = 'error';
@@ -37,38 +37,29 @@ document.addEventListener('DOMContentLoaded', () => {
         let resultText = "";
         let resultClass = "";
 
-        // --- Lógica del juego ---
-        if (numberInput > numRandom) {
-            // --- Comprobamos si está a 1 ---
+        // Lógica del juego 
+        if (numberInput > numRandom || numberInput < numRandom) {
+            mayor = numberInput > numRandom;
+            // Comprobamos si está muy cerca de adivinarlo (a 1)
             if (numberInput - numRandom === 1) {
                 resultText = "Casi casi";
                 resultClass = "result-close";
-                textAlert.textContent = '¡Estás muy cerca! Es un poco menor.';
+                mayor ? textAlert.textContent = '¡Estás muy cerca! Es un poco mayor.' : textAlert.textContent = '¡Estás muy cerca! Es un poco menor.';
             } else {
-                resultText = "Muy alto";
-                resultClass = "result-high";
-                textAlert.textContent = 'El número es menor de ' + numberInput;
+                if (mayor) {
+                    resultText = "Muy alto";
+                    resultClass = "result-high";
+                    textAlert.textContent = 'El número es menor de ' + numberInput;
+                } else {
+                    resultText = "Muy bajo";
+                    resultClass = "result-low";
+                    textAlert.textContent = 'El número es mayor de ' + numberInput;
+                }
             }
-
-            textAlert.className = 'error';
-            textCounter.textContent = 'Intentos totales: ' + counter;
-
-        } else if (numberInput < numRandom) {
-            // --- Comprobamos si está a 1 ---
-            if (numRandom - numberInput === 1) {
-                resultText = "Casi casi";
-                resultClass = "result-close";
-                textAlert.textContent = '¡Estás muy cerca! Es un poco mayor.';
-            } else {
-                resultText = "Muy bajo";
-                resultClass = "result-low";
-                textAlert.textContent = 'El número es mayor de ' + numberInput;
-            }
-
             textAlert.className = 'error';
             textCounter.textContent = 'Intentos totales: ' + counter;
         } else {
-            // --- Si acierta ---
+            // Si acierta 
             resultText = "¡Acertado!";
             resultClass = "result-win";
 
@@ -86,11 +77,11 @@ document.addEventListener('DOMContentLoaded', () => {
             textAlert.className = 'acertado';
             textCounter.textContent = '';
 
-            // 🔹 Ocultar el botón Enviar
+            // Ocultar el botón Enviar (Evita que se pueda pulsar para evitar errores)
             submitBtn.style.display = 'none';
         }
 
-        // --- Agregar fila al historial ---
+        // Agregar fila al historial
         const row = document.createElement("tr");
         row.innerHTML = `
             <td>${counter}</td>
@@ -101,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         form.reset();
     });
 
-    // --- Evento: reiniciar juego ---
+    // Evento: reiniciar juego
     resetBtn.addEventListener("click", () => {
         historyBody.innerHTML = "";
         input.value = "";
@@ -110,16 +101,16 @@ document.addEventListener('DOMContentLoaded', () => {
         counter = 0;
         numRandom = Math.floor(Math.random() * 100) + 1;
 
-        // 🔹 Mostrar nuevamente el botón Enviar
+        // Mostrar nuevamente el botón Enviar
         submitBtn.style.display = 'inline-block';
     });
 
-    // --- Evento: cambio de tema (modo oscuro) ---
+    // Evento: cambio de tema (modo oscuro)
     toggleSwitch.addEventListener("change", () => {
         document.body.classList.toggle("dark-mode", toggleSwitch.checked);
     });
 
-    // --- Ocultamos el historial por defecto ---
+    // Ocultamos el historial por defecto
     historyCard.style.display = "none";
 
     toggleHistoryBtn.addEventListener("click", () => {
@@ -204,7 +195,7 @@ function mostrarAnimacion(tipo) {
         container.style.zIndex = 9999;
         document.body.appendChild(container);
 
-        const totalFaces = 30; // número de caritas
+        const totalFaces = 30;
         const emojis = ['😞', '😢', '😔', '😭'];
 
         for (let i = 0; i < totalFaces; i++) {
