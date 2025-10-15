@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let counter = 0;
     let time = 60;
     let intervaloTime = null;
+    let gameOver = false;
 
     // Elementos de feedback
     const textAlert = document.createElement("p");
@@ -27,6 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Evento: enviar número 
     form.addEventListener('submit', (event) => {
         event.preventDefault();
+
+        if(gameOver) return; //Si el juego está terminado que no pueda seguir enviando
+
         const numberInput = parseInt(input.value, 10);
 
         if (counter === 0) iniciarCuentaAtras();
@@ -56,18 +60,19 @@ document.addEventListener('DOMContentLoaded', () => {
             else if (numberInput > numRandom) {
                 resultText = "Muy alto";
                 resultClass = "result-high";
-                textAlert.textContent = 'El número es menor que ' + numberInput;
+                textAlert.textContent = 'El número es MENOR que ' + numberInput;
             }
             else {
                 resultText = "Muy bajo";
                 resultClass = "result-low";
-                textAlert.textContent = 'El número es mayor que ' + numberInput;
+                textAlert.textContent = 'El número es MAYOR que ' + numberInput;
             }
 
             textAlert.className = 'error';
             textCounter.textContent = 'Intentos totales: ' + counter;
         } else {
             // Si acierta 
+            gameOver = true;
             resultText = "¡Acertado!";
             resultClass = "result-win";
 
@@ -115,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         timerEl.textContent = "60s";
         timerEl.className = "time-good";
         submitBtn.disabled = false;
+        gameOver = false;
 
         // Mostrar nuevamente el botón Enviar
         submitBtn.style.display = 'inline-block';
@@ -166,6 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitBtn.style.display = 'none'; // Oculta boton enviar
                 textAlert.textContent = "¡Se acabó el tiempo! Reinicia el juego.";
                 textAlert.className = "error";
+                gameOver = true;
             }
         }, 1000);
     }
