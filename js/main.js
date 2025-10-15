@@ -10,10 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleSwitch = document.getElementById('toggleTheme');
     const toggleHistoryBtn = document.getElementById("toggleHistoryBtn");
     const historyCard = document.getElementById("historyCard");
+    const timerEl = document.getElementById('timer');
 
     // Variables del juego
     let numRandom = Math.floor(Math.random() * 100) + 1;
     let counter = 0;
+    let time = 60;
+    let intervaloTime = null;
 
     // Elementos de feedback
     const textAlert = document.createElement("p");
@@ -25,6 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', (event) => {
         event.preventDefault();
         const numberInput = parseInt(input.value, 10);
+
+        if (counter === 0) iniciarCuentaAtras();
 
         // Comprueba que el valor introducido sea válido 
         if (isNaN(numberInput)) {
@@ -38,24 +43,27 @@ document.addEventListener('DOMContentLoaded', () => {
         let resultClass = "";
 
         // Lógica del juego 
-        if (numberInput > numRandom || numberInput < numRandom) {
-            mayor = numberInput > numRandom;
-            // Comprobamos si está muy cerca de adivinarlo (a 1)
-            if (numberInput - numRandom === 1) {
+        if (numberInput !== numRandom) {
+            const diferencia = Math.abs(numberInput - numRandom);
+
+            if (diferencia === 1) {
                 resultText = "Casi casi";
                 resultClass = "result-close";
-                mayor ? textAlert.textContent = '¡Estás muy cerca! Es un poco mayor.' : textAlert.textContent = '¡Estás muy cerca! Es un poco menor.';
-            } else {
-                if (mayor) {
-                    resultText = "Muy alto";
-                    resultClass = "result-high";
-                    textAlert.textContent = 'El número es menor de ' + numberInput;
-                } else {
-                    resultText = "Muy bajo";
-                    resultClass = "result-low";
-                    textAlert.textContent = 'El número es mayor de ' + numberInput;
-                }
+                textAlert.textContent = numberInput > numRandom
+                    ? '¡Estás muy cerca! Es un poco menor.'
+                    : '¡Estás muy cerca! Es un poco mayor.';
             }
+            else if (numberInput > numRandom) {
+                resultText = "Muy alto";
+                resultClass = "result-high";
+                textAlert.textContent = 'El número es menor que ' + numberInput;
+            }
+            else {
+                resultText = "Muy bajo";
+                resultClass = "result-low";
+                textAlert.textContent = 'El número es mayor que ' + numberInput;
+            }
+
             textAlert.className = 'error';
             textCounter.textContent = 'Intentos totales: ' + counter;
         } else {
@@ -76,6 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             textAlert.className = 'acertado';
             textCounter.textContent = '';
+            clearInterval(intervaloTime);
+            document.getElementById('timer').textContent = "¡A tiempo!";
 
             // Ocultar el botón Enviar (Evita que se pueda pulsar para evitar errores)
             submitBtn.style.display = 'none';
@@ -100,6 +110,11 @@ document.addEventListener('DOMContentLoaded', () => {
         textCounter.textContent = "";
         counter = 0;
         numRandom = Math.floor(Math.random() * 100) + 1;
+        clearInterval(intervaloTime);
+        time = 60;
+        timerEl.textContent = "60s";
+        timerEl.className = "time-good";
+        submitBtn.disabled = false;
 
         // Mostrar nuevamente el botón Enviar
         submitBtn.style.display = 'inline-block';
@@ -124,6 +139,36 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleHistoryBtn.textContent = "Ocultar historial";
         }
     });
+
+    function iniciarCuentaAtras() {
+        // Evita múltiples temporizadores simultáneos
+        clearInterval(intervaloTime);
+        time = 60; // Reinicia el tiempo
+
+        timerEl.textContent = `${time}s`;
+        timerEl.className = "timer-good";
+        intervaloTime = setInterval(() => {
+            time--;
+            timerEl.textContent = `${time}s`;
+
+            if (time <= 5) {
+                timerEl.className = "timer-bad";
+            } else if (time <= 10) {
+                timerEl.className = "timer-regular";
+            } else {
+                timerEl.className = "timer-good";
+            }
+
+            // Si el tiempo se acaba
+            if (time <= 0) {
+                clearInterval(intervaloTime);
+                timerEl.textContent = "¡Tiempo agotado!";
+                submitBtn.style.display = 'none'; // Oculta boton enviar
+                textAlert.textContent = "¡Se acabó el tiempo! Reinicia el juego.";
+                textAlert.className = "error";
+            }
+        }, 1000);
+    }
 });
 
 function mostrarAnimacion(tipo) {
@@ -227,4 +272,6 @@ function mostrarAnimacion(tipo) {
         setTimeout(() => container.remove(), 7000);
     }
 }
+
+
 
