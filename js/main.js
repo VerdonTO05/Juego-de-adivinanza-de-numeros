@@ -11,11 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleHistoryBtn = document.getElementById("toggleHistoryBtn");
     const historyCard = document.getElementById("historyCard");
     const timerEl = document.getElementById('timer');
+    const difficultySelect = document.getElementById('difficultySelect');
 
     // Variables del juego
-    let numRandom = Math.floor(Math.random() * 100) + 1;
+    let maxNumber = 100;
+    let initialTime = 60;
+    let numRandom = Math.floor(Math.random() * maxNumber) + 1;
     let counter = 0;
-    let time = 60;
+    let time = initialTime;
     let intervaloTime = null;
     let gameOver = false;
 
@@ -29,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', (event) => {
         event.preventDefault();
 
-        if(gameOver) return; //Si el juego está terminado que no pueda seguir enviando
+        if (gameOver) return; //Si el juego está terminado que no pueda seguir enviando
 
         const numberInput = parseInt(input.value, 10);
 
@@ -108,23 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Evento: reiniciar juego
-    resetBtn.addEventListener("click", () => {
-        historyBody.innerHTML = "";
-        input.value = "";
-        textAlert.textContent = "";
-        textCounter.textContent = "";
-        counter = 0;
-        numRandom = Math.floor(Math.random() * 100) + 1;
-        clearInterval(intervaloTime);
-        time = 60;
-        timerEl.textContent = "60s";
-        timerEl.className = "time-good";
-        submitBtn.disabled = false;
-        gameOver = false;
-
-        // Mostrar nuevamente el botón Enviar
-        submitBtn.style.display = 'inline-block';
-    });
+    resetBtn.addEventListener("click", resetGame);
 
     // Evento: cambio de tema (modo oscuro)
     toggleSwitch.addEventListener("change", () => {
@@ -149,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function iniciarCuentaAtras() {
         // Evita múltiples temporizadores simultáneos
         clearInterval(intervaloTime);
-        time = 60; // Reinicia el tiempo
+        time = initialTime; // Reinicia el tiempo
 
         timerEl.textContent = `${time}s`;
         timerEl.className = "timer-good";
@@ -176,6 +163,51 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, 1000);
     }
+
+
+    function setDifficulty(level) {
+        switch (level) {
+            case 'easy':
+                maxNumber = 50;
+                initialTime = 90;
+                break;
+            case 'medium':
+                maxNumber = 100;
+                initialTime = 60;
+                break;
+            case 'hard':
+                maxNumber = 200;
+                initialTime = 30;
+                break;
+        }
+
+        // Reiniciar el juego automáticamente con la nueva dificultad
+        resetGame();
+    }
+
+    // Detecta cuando se cambia la dificultad
+    difficultySelect.addEventListener('change', (e) => {
+        setDifficulty(e.target.value);
+    });
+
+    // Función para reiniciar el juego
+    function resetGame() {
+        historyBody.innerHTML = "";
+        input.value = "";
+        textAlert.textContent = "";
+        textCounter.textContent = "";
+        counter = 0;
+        numRandom = Math.floor(Math.random() * maxNumber) + 1;
+        clearInterval(intervaloTime);
+        time = initialTime;
+        timerEl.textContent = `${time}s`;
+        timerEl.className = "timer-good";
+        submitBtn.style.display = 'inline-block';
+        submitBtn.disabled = false;
+        gameOver = false;
+    }
+
+
 });
 
 function mostrarAnimacion(tipo) {
@@ -279,6 +311,4 @@ function mostrarAnimacion(tipo) {
         setTimeout(() => container.remove(), 7000);
     }
 }
-
-
 

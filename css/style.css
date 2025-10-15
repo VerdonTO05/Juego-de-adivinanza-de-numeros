@@ -149,7 +149,8 @@ body.dark-mode #historyTable tr:nth-child(even) { background: rgba(255,255,255,0
 .theme-switch {
   position: fixed;
   top: 15px;
-  right: 15px;
+  right: 70px;
+  z-index: 1001;
 }
 
 .theme-switch input { display: none; }
@@ -162,6 +163,7 @@ body.dark-mode #historyTable tr:nth-child(even) { background: rgba(255,255,255,0
   position: relative;
   cursor: pointer;
   transition: background 0.3s;
+  box-shadow: inset 0 0 3px rgba(0,0,0,0.4);
 }
 
 .switch::after {
@@ -173,7 +175,8 @@ body.dark-mode #historyTable tr:nth-child(even) { background: rgba(255,255,255,0
   position: absolute;
   top: 2px;
   left: 2px;
-  transition: transform 0.3s;
+  transition: transform 0.3s, background 0.3s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.4);
 }
 
 input:checked + .switch {
@@ -209,3 +212,41 @@ body.dark-mode .language-menu:hover { background: #636e72; }
 /* Ocultar traductor original */
 #google_translate_element, .goog-logo-link { display: none !important; }
 .goog-te-gadget { color: transparent !important; }
+
+.difficulty-menu {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background: #ffeaa7;
+  border-radius: 8px;
+  padding: 5px 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  font-family: Arial, sans-serif;
+  z-index: 1000;
+}
+
+body.dark-mode .difficulty-menu {
+  background:  var(--card-dark);
+  color: #fff;
+}
+
+/* Estilo general para el select de dificultad */
+#difficultySelect {
+  background: var(--card-light); 
+  color: var(--text-light);     
+  border: none;               
+  border-radius: 8px;           
+  padding: 5px 10px;
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Para modo oscuro */
+body.dark-mode #difficultySelect {
+  background: var(--card-dark);
+  color: var(--text-dark);
+}
+

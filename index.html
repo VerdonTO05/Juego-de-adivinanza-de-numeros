@@ -22,6 +22,15 @@
   <!-- Traductor oculto -->
   <div id="google_translate_element"></div>
 
+  <div id="difficultyMenu" class="difficulty-menu">
+    <label for="difficultySelect"></label>
+    <select id="difficultySelect">
+      <option value="easy">Fácil</option>
+      <option value="medium" selected>Medio</option>
+      <option value="hard">Difícil</option>
+    </select>
+  </div>
+
   <!-- Switch de tema -->
   <div class="theme-switch">
     <input type="checkbox" id="toggleTheme">
@@ -33,12 +42,12 @@
     <h3>Adivina el número secreto</h3>
     <br>
     <form id="myForm">
-      <input type="number" name="num" id="numInput" min="1" max="100" required>
+      <input type="number" name="num" id="numInput" min="1" max="200" required>
       <button type="submit" id="sendBtn">Enviar</button>
       <button type="button" id="resetBtn">Reiniciar</button>
       <button type="button" id="toggleHistoryBtn">Mostrar historial</button>
     </form>
-    <p id="timer" class="timer-good" >60s</p>
+    <p id="timer" class="timer-good">60s</p>
   </div>
 
   <!-- Historial -->
@@ -68,4 +77,5 @@
   </div>
 
 </body>
+
 </html>
