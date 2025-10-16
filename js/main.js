@@ -181,6 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
         }
 
+        input.max = maxNumber;
         // Reiniciar el juego automáticamente con la nueva dificultad
         resetGame();
     }
