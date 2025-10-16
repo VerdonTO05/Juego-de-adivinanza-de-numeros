@@ -80,12 +80,18 @@ document.addEventListener('DOMContentLoaded', () => {
             resultClass = "result-win";
 
             if (counter < 5) {
+                let ding = new Audio("./assets/sounds/ding.mp3");
+                ding.play();
                 textAlert.textContent = `Excelente: ¡Has acertado en ${counter} intentos!`;
                 mostrarAnimacion("excelente");
             } else if (counter < 10) {
+                let crowl = new Audio("./assets/sounds/crowl.mp3");
+                crowl.play();
                 textAlert.textContent = `Bien: ¡Has acertado en ${counter} intentos!`;
                 mostrarAnimacion("bien");
             } else {
+                let sad = new Audio("./assets/sounds/sad.mp3");
+                sad.play();
                 textAlert.textContent = `Regular: Has acertado en ${counter} intentos.`;
                 mostrarAnimacion("regular");
             }
