@@ -319,3 +319,55 @@ function mostrarAnimacion(tipo) {
     }
 }
 
+//FONDO DE ESTRELLAS MODO NEGRO//
+
+const canvas = document.getElementById('starfield');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  for (let i = 0; i < 150; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.5,
+      d: Math.random() * 0.5
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "white";
+    stars.forEach(star => {
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+      ctx.fill();
+      star.y += star.d;
+      if (star.y > canvas.height) star.y = 0;
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  // Fondo detrás de todo
+  canvas.style.position = "fixed";
+  canvas.style.top = "0";
+  canvas.style.left = "0";
+  canvas.style.zIndex = "-1";
+
+  //Cancion oculta
+ const elemento = window;
+let song = new Audio("../assets/sounds/spain.mp3");
+
+elemento.addEventListener('keydown', function(event) {
+  if (event.shiftKey && event.key.toLowerCase() === 'k') {
+    song.play();
+    event.preventDefault();
+  }
+});
